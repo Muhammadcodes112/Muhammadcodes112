@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Music Player</title>
+
+    <link rel="stylesheet" href="musicplayer.css">
+
+</head>
+
+<body>
+
+    <style>
+
+        *{
+
+    margin: 0;
+
+    padding: 0;
+
+    text-decoration: none;
+
+    border: none;
+
+    font-family: 'Poppins', sans-serif;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    scroll-behavior: smooth;
+
+    /* background-color: black; */
+
+}
+
+.container{
+
+    width: 100%;
+
+    height: 100vh;
+
+    background: #333;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+}
+
+.music-player{
+
+    background: #ffe0ef;
+
+    width: 400px;
+
+    padding: 25px 35px;
+
+    text-align: center;
+
+}
+
+nav{
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+
+}
+
+.circle img{
+
+    width: 20px;
+
+}
+
+
+
+.circle:hover{
+
+    transform: scale(1.1);
+
+}
+
+nav .circle{
+
+    border-radius: 50%;
+
+    width: 40px;
+
+    height: 40px;
+
+    line-height: 40px;
+
+    background: #fff;
+
+    color: #f53192;
+
+    box-shadow: 0 5px 10px rgba(255, 26, 26, 0.22);
+
+    justify-content: center;
+
+    align-items: center;
+
+    display: flex;
+
+    transition: .5s  ease;
+
+}
+
+.song-img{
+
+    width: 220px;
+
+    height: 220px;
+
+    border-radius: 50%;
+
+    border: 8px solid #fff;
+
+    box-shadow: 0 10px 60px rgba(255, 26, 26, 0.22);
+
+    animation: spin 5s linear infinite;
+
+}
+
+
+
+@keyframes spin {
+
+    0%{
+
+        transform: rotate(0deg);
+
+    }
+
+    100%{
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+
+
+.music-player h1{
+
+    font-style: 20px;
+
+    font-weight: 400;
+
+    color: #333;
+
+    margin-top: 20px;
+
+}
+
+.music-player p {
+
+    font-size: 14px;
+
+    color: #333;
+
+}
+
+#progress{
+
+    -webkit-appearance: none;
+
+    width: 100%;
+
+    height: 6px;
+
+    background: #f53192;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    margin: 40px 0;
+
+}
+
+#progress::-webkit-slider-thumb{
+
+    -webkit-appearance: none;
+
+    background: #f53192;
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    border: 8px solid #fff;
+
+    box-shadow: 0 5px 5px rgba(255, 26, 26, 0.22);
+
+}
+
+.controls{
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.controls div:hover:nth-child(1){
+
+    transform: scale(1.1);
+
+}
+
+.controls div:hover:nth-child(2){
+
+    transform: scale(1.4);
+
+}
+
+.controls div:hover:nth-child(3){
+
+    transform: scale(1.1);
+
+}
+
+.controls img{
+
+    width: 25px;
+
+}
+
+.controls div{
+
+    width: 60px;
+
+    height: 60px;
+
+    margin: 20px;
+
+    background: #fff;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #f53192;
+
+    box-shadow: 0 10px 20px rgba(255, 26, 26, 0.22);
+
+    cursor: pointer;
+
+    transition: .5s ease;
+
+}
+
+.controls div:nth-child(2){
+
+    transform: scale(1.5);
+
+    background: #f53192;
+
+    
+
+}
+
+    </style>
+
+    <div class="container">
+
+        <div class="music-player">
+
+            <nav>
+
+                <div class="circle">
+
+                    <img src="images/left_64px.png" alt="">
+
+                </div>
+
+                <div class="circle">
+
+                    <img src="images/menu_30px.png" alt="">
+
+                </div>
+
+            </nav>
+
+            <img src="images/annie-spratt-ezMwqvKHNEk-unsplash.jpg" alt="" class="song-img">
+
+            <h1>In da club</h1>
+
+            <p>50 cents</p>
+
+
+
+            <audio id="song">
+
+                <source src="./images/50_Cent_-_In-Da-Club_lekkiloaded.com.mp3" type="audio/mpeg">
+
+
+
+
+            </audio>
+
+            <input type="range" value="0" id="progress">
+
+
+
+            <div class="controls">
+
+                <div><img src="images/left_64px.png" alt=""></div>
+
+                <div onclick="playPause()"><img src="images/play_64px.png" alt="" id="ctrlicon"></div>
+
+                <div><img src="images/right_64px.png" alt=""></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        let progress = document.getElementById("progress");
+
+        let song = document.getElementById("song");
+
+        let ctrlicon = document.getElementById("ctrlicon");
+
+
+
+        song.onloadedmetadata = function(){
+
+            progress.max = song.duration;
+
+            progress.value = song.currentTime;
+
+        }
+
+
+
+        function playPause(){
+
+            if (ctrlicon.classList.contains("play_64px.png")){
+
+                song.pause();
+
+                ctrlicon.classList.remove("play_64px.png");
+
+                ctrlicon.classList.add("pause_button_32px.png");
+
+                
+
+            }else{
+
+                song.play();
+
+                ctrlicon.classList.add("play_64px.png");
+
+                ctrlicon.classList.remove("pause_button_32px.png");
+
+            }
+
+        }
+
+
+
+        if (song.play()){
+
+            setInterval(()=>{
+
+                progress.value = song.currentTime;
+
+            },500);
+
+        }
+
+
+
+        progress.onchange = function(){
+
+            song.play();
+
+            song.currentTime = progress.value;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

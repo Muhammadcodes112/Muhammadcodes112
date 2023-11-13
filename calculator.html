@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculator</title>
+
+    <link rel="stylesheet" href="calculator.css">
+
+</head>
+
+<style>
+
+    *{
+
+    margin: 0;
+
+    padding: 0;
+
+    text-decoration: none;
+
+    border: none;
+
+    font-family: 'Poppins', sans-serif;
+
+    box-sizing: border-box;
+
+    outline: none;
+
+    scroll-behavior: smooth;
+
+    background-color: black;
+
+}
+
+ .content{
+
+    /* margin-top: 20px;
+
+    margin-left: 450px; */
+
+    /* margin: auto;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+    padding: auto; */
+
+    display: grid;
+
+    justify-content: center;
+
+    align-items: center;;
+
+    max-width: 840px;
+
+    margin: 0 auto;
+
+    padding: 0 15px;
+
+    /* display: flex;flex-wrap: wrap; */
+
+ }
+
+ .calc button{
+
+    width: 100px;
+
+    height: 100px;
+
+    font-size: 30px;
+
+    border-radius: 50px;
+
+    color: white;
+
+    background-color: #615f5f;
+
+    transition: .3s ease;
+
+    row-gap: 40px;
+
+    column-gap: 50px;
+
+ }
+
+ .calc button:hover{
+
+    color: #615f5f;
+
+    background-color: white;
+
+ }
+
+ .calc .zero{
+
+    width: 200px;
+
+ }
+
+
+
+ input{
+
+    width: 400px;
+
+    height: 70px;
+
+    margin-left: 5px;
+
+    /* background-color: #615f5f; */
+
+    background-color: black;
+
+    margin-bottom: 20px;
+
+    color: white;
+
+    font-size: 40px;
+
+    text-align: right;
+
+ }
+
+ input::placeholder{
+
+    color: white;    
+
+ }
+
+
+
+ @media (max-width:576px){
+
+   .content{
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      row-gap: 10px;
+      
+      margin-top :200px
+
+   }
+
+   .calc button{
+
+      width: 75px;
+
+      height: 75px;
+
+      font-size: 25px;
+
+   }
+
+   .calc .zero{
+
+      width: 150px;
+
+   }
+
+   input{
+
+      margin-top: 20px;
+
+      width: 280px;
+
+      height: 50px;
+      
+      font-size: 50px;
+
+   }
+
+ }
+ 
+ @media (max-width:676px){
+     .calc button{
+         width: 70px;
+         
+         height: 70px;
+     }
+     
+ }
+
+</style>
+
+<body>
+
+    <script>
+
+        function appendToDisplay (value){
+
+            document.getElementById('display').value += value;
+
+        }
+
+        function cleardisplay (value){
+
+            document.getElementById('display').value = '';
+
+        }
+
+        function calculate(){
+
+            const displayValue = document.getElementById('display').value;
+
+            const result = eval(displayValue);
+
+            document.getElementById('display').value =  "  " + result;
+
+        }
+
+        function backspace(){
+
+            const currentDisplay = document.getElementById('display').value;
+
+            document.getElementById('display').value = currentDisplay.slice(0, -1);
+
+        }
+
+    </script>
+
+  <div class="calc">
+
+    <div class="content">
+
+        <input type="text" id="display" placeholder=" ">
+
+    <br>
+
+    <div class="first">
+
+        <button style="background-color: rgb(173, 170, 167);" id="cls" value="" onclick="cleardisplay(' ')" >C</button>
+
+        <button style="background-color: rgb(173, 170, 167);" class="divide" value="/" onclick="backspace('/')" > Del </button>
+
+        <button style="background-color: rgb(173, 170, 167);" class="three" value="%" onclick="appendToDisplay('%')" >%</button>
+
+        <button style="background-color: orange" class="dividee" value="/" onclick=appendToDisplay('/')>\</button>
+
+    </div>
+
+    <br>
+
+   <div class="second">
+
+        <button class="seven" value="7" onclick="appendToDisplay('7')">7</button>
+
+        <button class="eight" value="8" onclick="appendToDisplay('8')">8</button>
+
+        <button class="nine" value="9" onclick="appendToDisplay('9')">9</button>
+
+        <button style="background-color: orange;" class="multiply" value="*" onclick="appendToDisplay('*')">x</button>
+
+   </div>
+
+    <br>
+
+    <div class="third">
+
+        <button class="six" value="4" onclick="appendToDisplay('4')">4</button>
+
+        <button class="seven" value="5" onclick="appendToDisplay('5')">5</button>
+
+        <button class="eight" value="6" onclick="appendToDisplay('6')">6</button>
+
+        <button style="background-color: orange;" class="nine" value="-" onclick="appendToDisplay(' - ')">-</button>
+
+    </div>
+
+    <br>
+
+   <div class="fourth">
+
+        <button class="six" value="1" onclick="appendToDisplay('1')" >1</button>
+
+        <button class="seven" value="2" onclick="appendToDisplay('2')">2</button>
+
+        <button class="eight" value="3" onclick="appendToDisplay('3')" >3</button>
+
+        <button style="background-color: orange;" class="nine" value=" + " onclick="appendToDisplay(' + ')">+</button>
+
+   </div>
+
+    <br>
+
+   <div class="fifth">
+
+        <button class="zero" value="0" onclick="appendToDisplay('0')">0</button>
+
+        <button class="equals" value="." onclick="appendToDisplay('.')">.</button>
+        
+
+        <button style="background-color: orange;" class="equals" onclick="calculate()">=</button>
+
+        <!-- <button class="one">1</button>
+
+        <button class="one">1</button> -->
+
+   </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
